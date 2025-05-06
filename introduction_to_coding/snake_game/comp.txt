@@ -1,0 +1,1 @@
+g++ -O2 -I./sdl/include -L. -o main main.cpp graphics.cpp game_over.cpp corefuncs.cpp -lm -lSDL2 -lpthread -ldl -lrt

@@ -1,0 +1,106 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for the upload form */
+.upload-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Heading */
+.upload-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form styling */
+.upload-form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+.upload-form input, .upload-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Button styling */
+.upload-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #45a049;
+}
+
+/* Footer for extra links */
+.upload-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.upload-footer p {
+    font-size: 14px;
+}
+
+.upload-footer a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.upload-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-messages {
+    color: #ff4d4d;
+    background-color: #ffe5e5;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ff4d4d;
+    border-radius: 5px;
+    text-align: center;
+}
+.error{
+    color: #ff4d4d;
+    background-color: #ffe5e5;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ff4d4d;
+    border-radius: 5px;
+    text-align: center;
+}

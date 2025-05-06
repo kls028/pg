@@ -1,0 +1,268 @@
+/* Reset margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    color: #333;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff; /* Solid white background */
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a slight effect */
+}
+
+.navbar-link, .navbar-brand, .profile-name, .dropdown-content a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.navbar-left, .navbar-center, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Center the upload link */
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.navbar-link {
+    margin-right: 70px;
+}
+
+.navbar-link:hover {
+    color: #007bff;
+}
+
+/* Profile dropdown */
+.profile-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-name {
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown below profile name */
+    right: 0;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Show dropdown on hover */
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Gallery container */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Each image wrapper */
+.image-card {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-card:hover {
+    transform: scale(1.05);
+}
+
+/* Image styling */
+.image-card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+}
+
+/* Styling for image filename and watermark */
+.image-info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Form button styling */
+.delete-btn{
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+.select-btn{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.select-btn:hover{
+    background-color:  #0056b3;
+    
+}
+/* Style for links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+#title-div {
+    text-align: center;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+
+.full-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.full-image-container img {
+    max-width: 90%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+}
+
+
+/* Container for pagination links */
+.pagination-container {
+    align-items: center;
+    text-align: center; /* Ensure the pagination is centered */
+    margin-top: 30px; /* Increased margin above pagination */
+    margin-bottom: 50px; /* Increased margin below pagination */
+}
+
+/* Pagination links */
+.pagination {
+    position: relative;
+    display: inline-flex; /* Make pagination an inline flex container */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Individual pagination link */
+.pagination a {
+    padding: 10px 15px;
+    margin: 0 5px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for pagination links */
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+/* Disabled pagination link */
+.pagination a.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Current page indicator */
+.pagination span {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Optional: Add a border to pagination container */
+.pagination-container {
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+}
+
+/* Responsive design: stack pagination links on smaller screens */
+@media (max-width: 600px) {
+    .pagination {
+        flex-direction: column;
+    }
+    .pagination a, .pagination span {
+        margin: 5px 0;
+    }
+}
+
+
+

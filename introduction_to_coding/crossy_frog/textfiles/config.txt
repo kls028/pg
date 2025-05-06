@@ -1,0 +1,23 @@
+#wzór na punkty : p(t)=1000*e^(-0.069*t*0.1)
+#Poniżej możesz zmienić wartosci poszczegolnych ustawien
+#domyslne ustawienia: s:20 w:10 ruch:3 auta:5 predkosc:2, wagi: 4 2 1, przeszkody:5
+#szerokosc pola gry
+50
+#wysokosc pola gry
+25
+#limit czasu na ruch do gory (w sekundach)
+7
+#limit ilosci aut
+20
+#limit maksymalnej predkosci
+2
+#wagi czestotliwosci pojawiania sie pojazdow typu zwyklego, ostroznego i przyjaznego
+4
+2
+1
+#maksymalna ilosc przeszkod
+50
+#minimalna ilosc przeszkod
+30
+#jak szybko bocian się porusza (1- jak żaba 2+ - coraz wolniej)
+4

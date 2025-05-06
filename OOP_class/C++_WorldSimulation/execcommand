@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ -o game1 main.cpp World.cpp Organism.cpp Animal.cpp Sheep.cpp Turtle.cpp Wolf.cpp Fox.cpp Antelope.cpp Human.cpp Guarana.cpp Dandelion.cpp Grass.cpp Hogweed.cpp Nightshade.cpp Plant.cpp -lncurses

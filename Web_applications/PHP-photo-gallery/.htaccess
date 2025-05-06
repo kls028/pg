@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^register$ index.php?controller=user&action=register [QSA,L]
+RewriteRule ^login$ index.php?controller=user&action=login [QSA,L]
+RewriteRule ^upload$ index.php?controller=gallery&action=upload [QSA,L]
+RewriteRule ^gallery$ index.php?controller=gallery&action=gallery [QSA,L]
