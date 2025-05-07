@@ -38,6 +38,7 @@ Input/Output
 
     Output: All processor-generated output.
 Instruction set
+
     ' 	apostrophe	push an empty list on the stack
 
     , 	comma	pop a list from the stack
@@ -72,7 +73,7 @@ Instruction set
     
     + 	plus	pop number A off the stack; pop number B off the stack; put number A + B on the stack
     
-    & 	ampersand	print the contents of the stack to the standard output in the format:
+    & 	ampersand 	print the contents of the stack to the standard output in the format:
 
         n: list in the nth position on the stack
         ...
@@ -83,11 +84,12 @@ Instruction set
     
     [		pop list A off the stack; put the number equal to the ASCII number of the first character from list A on the stack
     
-        remaining characters	append this character to the top of the list at the top of the stack
+        remaining characters 	append this character to the top of the list at the top of the stack
 
 ---
 
-## 🛠️ Tech Stack  
+## 🛠️ Tech Stack 
+ 
 **Languages**:  
 - C with elements of C++
 
@@ -98,8 +100,11 @@ Instruction set
 
 ## 🚀 Features  
 - **Feature 1**: Own stack structure implementation (using double linked lists)
+
 - **Feature 2**: Own string structure implementation (using linked lists)
+
 - **Feature 3**: Wide use of recursion
+
 - **Feature 4**: Memory & time complexity optimized code
 
 ---
