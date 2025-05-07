@@ -7,9 +7,11 @@
 
 ---
 
-## 📝 Description  
+## 📝 Description
+  
 Context:
 "The interstellar commission of Gedanum designed the STOS A15D stack-based processor to control energy-efficient space probes. This emulator accelerates the development of probe control systems before mass production begins."
+
 Key Features
 
     Memory: Program memory (sequence of single-character instructions), instruction pointer, and a stack.
