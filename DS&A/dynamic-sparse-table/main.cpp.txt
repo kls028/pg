@@ -1,0 +1,310 @@
+#include <iostream>
+using namespace std;
+
+struct TreeNode {
+    int value;
+    TreeNode** children;
+};
+
+class TrieTree {
+private:
+    TreeNode* root;
+    int n, k;
+
+    bool isEmpty(TreeNode* node) const {
+        return node->value == -1;
+    }
+
+    void initializeChildren(TreeNode* node, int numChildren) {
+        if (node->children == nullptr) {
+            node->children = new TreeNode*[numChildren]();
+        }
+    }
+
+    TreeNode** findNodeLocation(int x) {
+        TreeNode** current = &root;
+
+        if ((*current)->value != x && (*current)->value != -1) {
+            int quotient = x / n;
+            int pos = x % n;
+
+            if ((*current)->children == nullptr) {
+                initializeChildren(*current, n);
+            }
+            current = &((*current)->children[pos]);
+
+            while (*current != nullptr) {
+                if ((*current)->value == x) {
+                    break;
+                }
+                pos = quotient % k;
+                quotient /= k;
+                if ((*current)->children == nullptr) {
+                    initializeChildren(*current, k);
+                }
+                current = &((*current)->children[pos]);
+            }
+        }
+        return current;
+    }
+
+    TreeNode* findLeftmostLeaf(TreeNode* node, bool skipSelf = false) {
+        if (node == nullptr) return nullptr;
+        TreeNode* current = node;
+        bool first = true;
+        while (current->children != nullptr) {
+            int childrenSize = (current == root) ? n : k;
+            int i = 0;
+            for (; i < childrenSize; ++i) {
+                if (current->children[i] != nullptr) {
+                    current = current->children[i];
+                    break;
+                }
+            }
+            if (i == childrenSize) break;
+            first = false;
+        }
+        if (skipSelf && current == node) return nullptr;
+        return current;
+    }
+
+    void preorderTraversal(TreeNode* node) {
+        if (node == nullptr || isEmpty(node)) return;
+
+        printf("%d ", node->value);
+
+        if (node->children != nullptr) {
+            int childrenSize = (node == root) ? n : k;
+            for (int i = 0; i < childrenSize; i++) {
+                if (node->children[i] != nullptr) {
+                    preorderTraversal(node->children[i]);
+                }
+            }
+        }
+    }
+
+    bool isLeaf(TreeNode* node) const {
+        if (node->children == nullptr) return true;
+        int childrenSize = (node == root) ? n : k;
+        for (int i = 0; i < childrenSize; i++) {
+            if (node->children[i] != nullptr) return false;
+        }
+        return true;
+    }
+
+    void deleteNode(TreeNode* node) {
+        if (node == nullptr) return;
+        if (node->children != nullptr) {
+            int childrenSize = (node == root) ? n : k;
+            for (int i = 0; i < childrenSize; i++) {
+                if (node->children[i] != nullptr) {
+                    deleteNode(node->children[i]);
+                }
+            }
+            delete[] node->children;
+        }
+        delete node;
+    }
+
+public:
+    TrieTree(int n, int k) : n(n), k(k) {
+        root = new TreeNode();
+        root->value = -1;
+        root->children = nullptr;
+    }
+
+    ~TrieTree() {
+        deleteNode(root);
+    }
+
+    bool insert(int x) {
+        TreeNode** location = findNodeLocation(x);
+
+        if (*location == nullptr) {
+            *location = new TreeNode();
+            (*location)->value = x;
+            (*location)->children = nullptr;
+            return true;
+        } else if (isEmpty(*location)) {
+            (*location)->value = x;
+            return true;
+        }
+        return false;
+    }
+
+    bool lookup(int x) {
+        TreeNode** location = findNodeLocation(x);
+        return (*location != nullptr && (*location)->value == x);
+    }
+
+    bool remove(int x) {
+        TreeNode** location = findNodeLocation(x);
+
+        if (*location == nullptr || isEmpty(*location) || (*location)->value != x) {
+            return false;
+        }
+
+        TreeNode* nodeToRemove = *location;
+
+        if (nodeToRemove == root) {
+            if (isLeaf(root)) {
+                root->value = -1;
+            } else {
+                TreeNode* replacement = findLeftmostLeaf(root, true);
+                if (replacement != nullptr) {
+                    root->value = replacement->value;
+                    if (isLeaf(replacement)) {
+                        TreeNode* parent = findParent(replacement);
+                        if (parent != nullptr) {
+                            int childrenSize = (parent == root) ? n : k;
+                            for (int i = 0; i < childrenSize; i++) {
+                                if (parent->children[i] == replacement) {
+                                    parent->children[i] = nullptr;
+                                    break;
+                                }
+                            }
+                            delete replacement;
+                        }
+                    }
+                }
+            }
+        } else {
+            if (isLeaf(nodeToRemove)) {
+                deleteNode(nodeToRemove);
+                *location = nullptr;
+            } else {
+                TreeNode* replacement = findLeftmostLeaf(nodeToRemove, true);
+                if (replacement != nullptr) {
+                    nodeToRemove->value = replacement->value;
+                    if (isLeaf(replacement)) {
+                        TreeNode* parent = findParent(replacement);
+                        if (parent != nullptr) {
+                            int childrenSize = (parent == root) ? n : k;
+                            for (int i = 0; i < childrenSize; i++) {
+                                if (parent->children[i] == replacement) {
+                                    parent->children[i] = nullptr;
+                                    break;
+                                }
+                            }
+                            delete replacement;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    TreeNode* findParent(TreeNode* child) {
+        if (child == root) return nullptr;
+        
+        // Use the same approach as findNodeLocation
+        int value = child->value;
+        TreeNode* current = root;
+        TreeNode* parent = nullptr;
+        
+        if (current->value != value) {
+            int quotient = value / n;
+            int pos = value % n;
+            
+            if (current->children != nullptr && current->children[pos] == child) {
+                return current;
+            }
+            
+            if (current->children != nullptr) {
+                current = current->children[pos];
+                parent = root;
+                
+                while (current != nullptr) {
+                    if (current == child) {
+                        return parent;
+                    }
+                    pos = quotient % k;
+                    quotient /= k;
+                    
+                    if (current->children != nullptr && current->children[pos] == child) {
+                        return current;
+                    }
+                    
+                    if (current->children != nullptr) {
+                        parent = current;
+                        current = current->children[pos];
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    void printPreorder() {
+        if (!isEmpty(root)) {
+            printf("%d ", root->value);
+        }
+        if (root->children != nullptr) {
+            for (int i = 0; i < n; i++) {
+                if (root->children[i] != nullptr) {
+                    preorderTraversal(root->children[i]);
+                }
+            }
+        }
+        printf("\n");
+    }
+};
+
+bool loadInput(int& x, const int min, const int max) {
+    scanf("%d\n", &x);
+    return (x >= min && x <= max);
+}
+
+int main() {
+    int N, min_val, max_val, n, k;
+    scanf("%d %d %d %d %d\n", &N, &min_val, &max_val, &n, &k);
+
+    TrieTree trie(n, k);
+
+    for (int i = 0; i < N; i++) {
+        char instruction;
+        scanf("%c\n", &instruction);
+
+        switch (instruction) {
+            case 'I': {
+                int x;
+                if (loadInput(x, min_val, max_val)) {
+                    if (!trie.insert(x)) {
+                        printf("%d exist\n", x);
+                    }
+                }
+                break;
+            }
+            case 'L': {
+                int x;
+                if (loadInput(x, min_val, max_val)) {
+                    if (trie.lookup(x)) {
+                        printf("%d exist\n", x);
+                    } else {
+                        printf("%d not exist\n", x);
+                    }
+                }
+                break;
+            }
+            case 'D': {
+                int x;
+                if (loadInput(x, min_val, max_val)) {
+                    if (!trie.remove(x)) {
+                        printf("%d not exist\n", x);
+                    }
+                }
+                break;
+            }
+            case 'P':
+                trie.printPreorder();
+                break;
+            default:
+                return 1;
+        }
+    }
+
+    return 0;
+}
